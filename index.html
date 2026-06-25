@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="km">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ជូនចំពោះ កញ្ចនា ❤️</title>
 
     <style>
@@ -30,8 +28,6 @@
             transition: transform 0.1s ease-out;
             z-index: -5;
         }
-
-        /* Clouds */
         .clouds {
             position: fixed;
             top: 0;
@@ -49,7 +45,6 @@
             to { transform: translateX(-50%); }
         }
 
-  
         .star {
             position: absolute;
             background: white;
@@ -61,7 +56,6 @@
             0%, 100% { opacity: .2; transform: scale(.8); }
             50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 10px white; }
         }
-
 
         .love-card {
             position: absolute;
@@ -93,14 +87,14 @@
             margin-bottom: 20px;
         }
 
-        #message {
-            white-space: pre-line;
-            line-height: 1.8;
-            text-align: left;
-            min-height: 250px;
-            margin-top: 20px;
+       #message {
+    white-space: pre-line;
+    line-height: 1.8;
+    text-align: center; 
+    min-height: 250px;
+    margin-top: 20px;
+    font-size: 1.05rem;
         }
-
         .hint {
             margin-top: 20px;
             animation: pulse 1.5s infinite;
@@ -126,23 +120,12 @@
             10% { opacity: 1; }
             100% { transform: translateY(-110vh) translateX(80px) rotate(360deg); opacity: 0; }
         }
-        #yt-player-container {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            overflow: hidden;
-        }
     </style>
 </head>
 <body>
 
     <div class="background"></div>
     <div class="clouds"></div>
-
-    <div id="yt-player-container">
-        <div id="player"></div>
-    </div>
 
     <div class="love-card" id="mainCard" onclick="startLove()">
         <h1 id="title">🌹 សារក្នុងចិត្ត 🌹</h1>
@@ -151,49 +134,33 @@
         <div class="hint" id="hint">👉 ចុចទីនេះ</div>
     </div>
 
-    <script>
-        const loveText = `
-ផ្ញើជូន៖ លាក់ ចន្ទកញ្ចនា (ថ្នាក់ 8B)
+   <script>
+        const loveText = `ផ្ញើជូន៖ លាក់ ចន្ទកញ្ចនា (ថ្នាក់ 8B)
 
 នេះជាពាក្យពេចន៍ និងរឿងរ៉ាវក្នុងចិត្តដែលខ្ញុំចង់ប្រាប់។
 
 ទោះបីខ្ញុំមកក្រោយគេក៏ដោយ
 ខ្ញុំនៅតែរីករាយដែលបានស្គាល់អ្នក។
 
-អ្នកគឺជាមនុស្សម្នាក់
-ដែលធ្វើឲ្យថ្ងៃធម្មតារបស់ខ្ញុំ
+អ្នកគឺជាមនុស្សម្នាក់ដែល
+ធ្វើឲ្យថ្ងៃធម្មតារបស់ខ្ញុំ
 ក្លាយជាថ្ងៃពិសេស។
 
 ពេលនេះខ្ញុំសូមជូនពរ
 ឲ្យអ្នកមានសុភមង្គល
 និងស្នាមញញឹមជានិច្ច។
 
+ពីខ្ញុំ៖ Sophanarath 🤍
+
 ❤️ Love Code: 143
-Decode: I Love You ❤️
-`;
+Decode: I Love You ❤️`;
 
         let started = false;
         let index = 0;
-        let player;
-        let tag = document.createElement('script');
-        tag.src = "https://youtu.be/8Y2L-kt4lUc?si=ys3k8C1oh8mojiMa";
-        let firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '0',
-                width: '0',
-                videoId: '8Y2L-kt4lUc',
-                playerVars: {
-                    'autoplay': 0,
-                    'loop': 1,
-                    'playlist': '8Y2L-kt4lUc'
-                }
-            });
-        }
-
-
+        
+        const audio = new Audio('Perfect.mp3'); 
+        audio.loop = true; 
+        audio.volume = 0.2; 
         for (let i = 0; i < 120; i++) {
             let star = document.createElement("div");
             star.className = "star";
@@ -205,6 +172,7 @@ Decode: I Love You ❤️
             star.style.animationDuration = Math.random() * 3 + 1 + "s";
             document.body.appendChild(star);
         }
+
         function startLove() {
             if (started) return;
             started = true;
@@ -212,10 +180,9 @@ Decode: I Love You ❤️
             document.getElementById("hint").style.display = "none";
             document.getElementById("message").innerHTML = "";
 
-            if (player && player.playVideo) {
-                player.playVideo();
-            }
-
+            audio.play().catch(error => {
+                console.log("Audio play failed: ", error);
+            });
 
             typeWriter();
             setInterval(createHeart, 250);
@@ -241,6 +208,7 @@ Decode: I Love You ❤️
                 setTimeout(typeWriter, 50);
             }
         }
+
         function createHeart() {
             let icons = ["❤️", "💖", "💕", "🌹", "🌸", "✨"];
             let heart = document.createElement("div");
@@ -252,7 +220,6 @@ Decode: I Love You ❤️
             document.body.appendChild(heart);
             setTimeout(() => { heart.remove(); }, 8000);
         }
-
 
         function createShootingStar() {
             const star = document.createElement("div");
@@ -273,6 +240,7 @@ Decode: I Love You ❤️
 
             setTimeout(() => { star.remove(); }, 2000);
         }
+
         function createSakura() {
             let petal = document.createElement("div");
             petal.className = "falling-element";
@@ -289,6 +257,7 @@ Decode: I Love You ❤️
 
             setTimeout(() => { petal.remove(); }, 8000);
         }
+
         function createSnow() {
             let snow = document.createElement("div");
             snow.className = "falling-element";
@@ -306,6 +275,7 @@ Decode: I Love You ❤️
 
             setTimeout(() => { snow.remove(); }, 7000);
         }
+
         document.addEventListener("mousemove", (e) => {
             const x = (e.clientX / window.innerWidth - .5) * 20;
             const y = (e.clientY / window.innerHeight - .5) * 20;
