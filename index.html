@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <title>ជូនចំពោះ កញ្ចនា ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Khmer OS Battambang', sans-serif;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://cdn.pixabay.com/photo/2024/06/30/10/28/sky-8862862_1280.png") center center/cover no-repeat;
+            transition: transform 0.1s ease-out;
+            z-index: -5;
+        }
+        .clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: url("https://www.transparenttextures.com/patterns/clouds.png");
+            opacity: .25;
+            animation: cloudMove 60s linear infinite;
+            z-index: -4;
+        }
+
+        @keyframes cloudMove {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: .2; transform: scale(.8); }
+            50% { opacity: 1; transform: scale(1.4); box-shadow: 0 0 10px white; }
+        }
+
+        .love-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 700px;
+            padding: 35px;
+            background: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, .3);
+            box-shadow: 0 0 40px rgba(255, 255, 255, .2), 0 0 80px rgba(255, 77, 109, .2);
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        h1 { margin-bottom: 10px; }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255, 77, 109, .35);
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+       #message {
+            white-space: pre-line;
+            line-height: 1.8;
+            text-align: center; 
+            min-height: 250px;
+            margin-top: 20px;
+            font-size: 1.05rem;
+        }
+        .hint {
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            50% { opacity: 0.5; text-shadow: 0 0 10px white; }
+        }
+
+        .falling-element, .heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            bottom: -50px;
+            animation: flyUp linear forwards;
+        }
+
+        @keyframes flyUp {
+            0% { transform: translateY(0) scale(.5); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-110vh) translateX(80px) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+    <div class="clouds"></div>
+
+    <div class="love-card" id="mainCard" onclick="startLove()">
+        <h1 id="title">🌹 សារក្នុងចិត្ត 🌹</h1>
+        <div class="tag">ជូនចំពោះ៖ លាក់ ចន្ទកញ្ចនា (ថ្នាក់ 8B)</div>
+        <div id="message">🌷 សូមចុចលើផ្ទាំងនេះ ...</div>
+        <div class="hint" id="hint">👉 ចុចទីនេះ</div>
+    </div>
+
+   <script>
+        const loveText = `ផ្ញើជូន៖ លាក់ ចន្ទកញ្ចនា (ថ្នាក់ 8B)
+
+នេះជាពាក្យពេចន៍ និងរឿងរ៉ាវក្នុងចិត្តដែលខ្ញុំចង់ប្រាប់។
+
+ទោះបីខ្ញុំមកក្រោយគេក៏ដោយ
+ខ្ញុំនៅតែរីករាយដែលបានស្គាល់អ្នក។
+
+អ្នកគឺជាមនុស្សម្នាក់ដែល
+ធ្វើឲ្យថ្ងៃធម្មតារបស់ខ្ញុំ
+ក្លាយជាថ្ងៃពិសេស។
+
+ពេលនេះខ្ញុំសូមជូនពរ
+ឲ្យអ្នកមានសុភមង្គល
+និងស្នាមញញឹមជានិច្ច។
+
+ពីខ្ញុំ៖ Sophanarath 🤍
+
+❤️ Love Code: 143
+Decode: I Love You ❤️`;
+
+        let started = false;
+        let index = 0;
+        
+        const audio = new Audio('Perfect.mp3'); 
+        audio.loop = true; 
+        audio.volume = 0.2; 
+        for (let i = 0; i < 120; i++) {
+            let star = document.createElement("div");
+            star.className = "star";
+            let size = Math.random() * 3 + 1;
+            star.style.width = size + "px";
+            star.style.height = size + "px";
+            star.style.left = Math.random() * 100 + "vw";
+            star.style.top = Math.random() * 100 + "vh";
+            star.style.animationDuration = Math.random() * 3 + 1 + "s";
+            document.body.appendChild(star);
+        }
+
+        function startLove() {
+            if (started) return;
+            started = true;
+
+            document.getElementById("hint").style.display = "none";
+            document.getElementById("message").innerHTML = "";
+
+            audio.play().catch(error => {
+                console.log("Audio play failed: ", error);
+            });
+
+            typeWriter();
+            setInterval(createHeart, 250);
+            setInterval(createShootingStar, 3000);
+            setInterval(createSakura, 500);
+            setInterval(createSnow, 700);
+            
+            document.getElementById("mainCard").style.animation = "floatCard 4s ease-in-out infinite";
+        }
+
+        const styleSheet = document.styleSheets[0];
+        styleSheet.insertRule(`
+            @keyframes floatCard {
+                0%, 100% { transform: translate(-50%, -50%); }
+                50% { transform: translate(-50%, -53%); }
+            }
+        `, styleSheet.cssRules.length);
+
+        function typeWriter() {
+            if (index < loveText.length) {
+                document.getElementById("message").innerHTML += loveText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100); 
+            }
+        }
+
+        function createHeart() {
+            let icons = ["❤️", "💖", "💕", "🌹", "🌸", "✨"];
+            let heart = document.createElement("div");
+            heart.className = "heart";
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = Math.random() * 25 + 20 + "px";
+            heart.style.animationDuration = Math.random() * 4 + 4 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 8000);
+        }
+
+        function createShootingStar() {
+            const star = document.createElement("div");
+            star.style.position = "fixed";
+            star.style.width = "3px";
+            star.style.height = "120px";
+            star.style.background = "linear-gradient(white, transparent)";
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.top = "-100px";
+            star.style.transform = "rotate(45deg)";
+            star.style.zIndex = "999";
+            document.body.appendChild(star);
+
+            star.animate([
+                { transform: "translate(0,0) rotate(45deg)", opacity: 1 },
+                { transform: "translate(-500px,500px) rotate(45deg)", opacity: 0 }
+            ], { duration: 2000 });
+
+            setTimeout(() => { star.remove(); }, 2000);
+        }
+
+        function createSakura() {
+            let petal = document.createElement("div");
+            petal.className = "falling-element";
+            petal.innerHTML = "🌸";
+            petal.style.left = Math.random() * 100 + "vw";
+            petal.style.top = "-50px";
+            petal.style.fontSize = (20 + Math.random() * 15) + "px";
+            document.body.appendChild(petal);
+
+            petal.animate([
+                { transform: "translate(0,0) rotate(0deg)" },
+                { transform: `translate(${Math.random() * 150}px, 110vh) rotate(720deg)` }
+            ], { duration: 8000 });
+
+            setTimeout(() => { petal.remove(); }, 8000);
+        }
+
+        function createSnow() {
+            let snow = document.createElement("div");
+            snow.className = "falling-element";
+            snow.innerHTML = "❄️";
+            snow.style.left = Math.random() * 100 + "vw";
+            snow.style.top = "-30px";
+            snow.style.fontSize = (10 + Math.random() * 10) + "px";
+            snow.style.opacity = Math.random();
+            document.body.appendChild(snow);
+
+            snow.animate([
+                { transform: "translateY(0)" },
+                { transform: `translateY(110vh) translateX(${Math.random() * 50 - 25}px)` }
+            ], { duration: 7000 });
+
+            setTimeout(() => { snow.remove(); }, 7000);
+        }
+
+        document.addEventListener("mousemove", (e) => {
+            const x = (e.clientX / window.innerWidth - .5) * 20;
+            const y = (e.clientY / window.innerHeight - .5) * 20;
+            const bg = document.querySelector(".background");
+            if(bg) bg.style.transform = `scale(1.1) translate(${x}px, ${y}px)`;
+        });
+    </script>
+</body>
+</html>
