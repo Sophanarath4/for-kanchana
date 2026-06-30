@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Bagasse Box - ទំព័រដើម</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Khmer OS Battambang', sans-serif; scroll-behavior: smooth; }
+        body { background:#f4f9f4; color:#2c3e50; }
+        
+        /* Navigation Menu */
+        header { background:#005a36; color:white; padding:15px 50px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 4px 12px rgba(0,0,0,0.1); position:sticky; top:0; z-index:100; }
+        .logo-area { display:flex; align-items:center; gap:10px; }
+        .logo { font-size:24px; font-weight:bold; letter-spacing:1px; }
+        nav a { color:#e2f0e9; text-decoration:none; margin-left:25px; font-size:16px; font-weight:bold; transition:0.3s; padding-bottom:4px; }
+        nav a:hover, nav a.active { color:#ffe082; border-bottom:2px solid #ffe082; }
+        
+        /* Hero Section */
+        .hero { height:75vh; background:linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("https://i.pinimg.com/736x/b4/6c/03/b46c0373e34ba5da549e4ca579fd8504.jpg") center/cover; display:flex; justify-content:center; align-items:center; text-align:center; color:white; padding:20px; border-bottom:8px solid #005a36; }
+        .hero h1 { font-size:52px; margin-bottom:20px; font-weight:bold; text-shadow:2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size:22px; margin-bottom:30px; color:#e8f5e9; }
+        
+        /* Section General Styling */
+        section { padding:80px 10%; }
+        h2 { text-align:center; color:#005a36; margin-bottom:40px; font-size:32px; font-weight:bold; }
+        
+        /* Button */
+        .btn { background:#4caf50; padding:15px 40px; color:white; text-decoration:none; border-radius:30px; font-size:18px; display:inline-block; transition:0.3s; font-weight:bold; box-shadow:0 4px 15px rgba(76,175,80,0.4); }
+        .btn:hover { background:#1b5e20; transform:translateY(-2px); box-shadow:0 6px 20px rgba(27,94,32,0.6); }
+        
+        /* About Us Content Area */
+        .content-about { max-width:1100px; margin:0 auto; background:white; padding:45px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.04); display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+        .content-about img { width:100%; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+        .about-text h3 { color:#005a36; margin-bottom:15px; font-size:24px; font-weight:bold; }
+        .about-text p { line-height:1.8; font-size:16px; color:#555; }
+        
+        footer { background:#005a36; color:white; text-align:center; padding:25px; margin-top:40px; font-size:14px; }
+        @media(max-width:768px) { header { flex-direction:column; gap:15px; padding:15px; } nav a { margin:0 10px; font-size:14px; } .hero h1 { font-size:36px; } .content-about { grid-template-columns:1fr; padding:25px; } }
+   * { margin:0; padding:0; box-sizing:border-box; font-family:'Khmer OS Battambang', sans-serif; }
+        body { background:#f4f9f4; color:#2c3e50; }
+        
+        /* --- Header & Navigation --- */
+        header { 
+            background:#005a36; 
+            color:white; 
+            padding:15px 50px; 
+            display:flex; 
+            justify-content:space-between; 
+            align-items:center; 
+            box-shadow:0 4px 12px rgba(0,0,0,0.1); 
+            flex-wrap: wrap; /* ជំនួយពេលបើកលើទូរសព្ទ */
+        }
+        .logo { font-size:24px; font-weight:bold; }
+        nav { display: flex; flex-wrap: wrap; }
+        nav a { color:#e2f0e9; text-decoration:none; margin-left:25px; font-size:16px; font-weight:bold; padding: 5px 0; }
+        nav a:hover, nav a.active { color:#ffe082; }
+        
+        /* --- Section Main --- */
+        section { padding:60px 10%; }
+        h2 { text-align:center; color:#005a36; margin-bottom:40px; font-size:32px; font-weight:bold; }
+        
+        /* --- Product Cards Grid --- */
+        .cards { 
+            display:grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* លោតតម្រៀបតាមទំហំអេក្រង់អូតូ */
+            gap:30px; 
+        }
+        .card { background:white; padding:35px; border-radius:20px; box-shadow:0 5px 20px rgba(0,0,0,0.03); text-align:center; transition:0.3s; border:1px solid #e8f5e9; display: flex; flex-direction: column; justify-content: space-between; }
+        .card:hover { transform:translateY(-5px); box-shadow:0 12px 25px rgba(0,0,0,0.08); }
+        
+        /* ស្ទីលរូបភាព */
+        .card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 10px; 
+            margin-top: 15px;
+        }
+        
+        .price { font-size:28px; color:#005a36; font-weight:bold; margin:20px 0; }
+        .btn-select { display:inline-block; margin-top:15px; padding:12px 25px; background:#005a36; color:white; text-decoration:none; border-radius:8px; font-weight:bold; transition:0.3s; }
+        .btn-select:hover { background:#4caf50; }
+        
+        footer { background:#005a36; color:white; text-align:center; padding:25px; margin-top:40px; }
+
+        /* 📱 ស្ទីលបន្ថែមសម្រាប់អេក្រង់ទូរសព្ទ (លោតការងារនៅពេលអេក្រង់តូចជាង 768px) */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 15px;
+            }
+            .logo { margin-bottom: 15px; }
+            nav {
+                justify-content: center;
+                width: 100%;
+            }
+            nav a {
+                margin: 5px 10px;
+                font-size: 15px;
+            }
+            section {
+                padding: 40px 5%; /* បង្រួមគម្លាតសងខាងឱ្យសល់កន្លែងធំទូលាយលើទូរសព្ទ */
+            }
+            h2 { font-size: 26px; margin-bottom: 25px; }
+        }
+   </style>
+
+</head>
+<body>
+
+<header>
+    <div class="logo-area"><div class="logo">🌱 Zero waste team</div></div>
+    <nav>
+        <a href="#home" class="active">ទំព័រដើម</a>
+        <a href="#about">អំពីយើង</a>
+        <a href="product.html">ផលិតផល</a>
+        <a href="benefit.html">អត្ថប្រយោជន៍</a>
+        <a href="design.html" style="color:#ffe082;">កម្មង់ឌីស្សាញ</a>
+    </nav>
+</header>
+
+<div id="home" class="hero">
+    <div>
+        <h1>ប្រអប់អាហារ និងកែវពីកាកអំពៅ</h1>
+        <p>ជ្រើសរើសផលិតផលធម្មជាតិ ឌីស្សាញបោះពុម្ព Logo ផ្ទាល់ខ្លួន ដើម្បីអាជីវកម្មបៃតង</p>
+        <a href="design.html" class="btn">សាកល្បងឌីស្សាញ និងកម្មង់ឥឡូវនេះ 🎨</a>
+    </div>
+</div>
+
+<section id="about">
+    <h2>អំពីសហគ្រាសរបស់យើង</h2>
+    <div class="content-about">
+        <img src="https://s.alicdn.com/@sc04/kf/H0e590f671d6c42498bdeb1e4fc7cd2f16.jpg_300x300.jpg" alt="About US">
+        <div class="about-text">
+            <h3>Eco Bagasse Box Cambodia</h3>
+            <p>យើងជាសហគ្រាសឈានមុខក្នុងការកែច្នៃកាកអំពៅធម្មជាតិ ទៅជាប្រអប់ដាក់អាហារ ចាន និងកែវ ដែលមានគុណភាពខ្ពស់ សុវត្ថិភាពសម្រាប់សុខភាព និងអាចរលាយបាត់ទៅក្នុងដីដោយធម្មជាតិ ១០០% ក្នុងរយៈពេលខ្លី។</p><br>
+            <p>គោលបំណងចម្បងរបស់យើងគឺការចូលរួមកាត់បន្ថយសំណល់ប្លាស្ទិកនៅកម្ពុជា និងផ្តល់ជូននូវជម្រើសវេចខ្ចប់បែបបរិស្ថាន (Eco-Friendly Packaging) សម្រាប់អាជីវកម្មអាហារ និងភេសជ្ជៈគ្រប់ប្រភេទ។</p>
+        </div>
+    </div>
+</section>
+
+<footer>© 2026 Eco Bagasse Box Cambodia - ផលិតដោយ Zero Waste Team 🌱</footer>
+
+</body>
+</html>
